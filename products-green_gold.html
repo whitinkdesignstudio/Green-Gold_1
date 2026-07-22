@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Products — GreenGold | Go Green, Go Bold</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,380;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<a href="home.html">Home</a>
+
+<style>
+  :root{
+    --teal:#00A2B1;
+    --teal-deep:#00707D;
+    --teal-tint:#E6F5F6;
+    --gold:#EFBF04;
+    --gold-deep:#B98F00;
+    --gold-tint:#FDF3D2;
+    --ink:#16211F;
+    --cream:#FBF7EE;
+    --sand:#F3EAD3;
+    --charcoal:#20211D;
+    --graphite:#5C5B52;
+    --line: rgba(32,33,29,0.12);
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    background:var(--cream);
+    color:var(--charcoal);
+    font-family:'Inter', sans-serif;
+    overflow-x:hidden;
+  }
+  img{ display:block; max-width:100%; }
+  ::selection{ background:var(--teal); color:var(--cream); }
+
+  .wrap{ max-width:1280px; margin:0 auto; padding:0 56px; }
+  section{ position:relative; }
+  .section-pad{ padding:100px 0; }
+
+  h1,h2,h3{ font-family:'Fraunces', serif; font-weight:600; letter-spacing:-0.01em; color:var(--charcoal); }
+  em{ font-style:italic; font-weight:400; color:var(--teal-deep); }
+
+  .eyebrow{
+    font-size:12px; font-weight:600;
+    letter-spacing:0.16em; text-transform:uppercase;
+    color:var(--teal-deep);
+    display:flex; align-items:center; gap:10px;
+    margin-bottom:16px;
+  }
+  .eyebrow::before{ content:''; width:8px; height:8px; border-radius:50%; background:var(--gold); display:inline-block; flex-shrink:0; }
+
+  .section-head{ max-width:60ch; margin-bottom:48px; }
+  .section-title{ font-size:clamp(30px,3.4vw,48px); line-height:1.12; }
+  .section-desc{ font-size:16px; line-height:1.7; color:var(--graphite); margin-top:16px; max-width:62ch; }
+
+  .bg-tint{ background:var(--teal-tint); }
+  .bg-sand{ background:var(--sand); }
+
+  .btn{
+    position:relative; display:inline-flex; align-items:center; gap:10px;
+    font-size:13px; font-weight:600; letter-spacing:0.04em; text-transform:uppercase;
+    text-decoration:none; padding:15px 30px; border-radius:40px;
+    transition:transform .25s ease, background .3s ease, color .3s ease, box-shadow .3s ease;
+    border:none; cursor:pointer;
+  }
+  .btn-solid{ background:var(--teal); color:#fff; box-shadow:0 10px 24px -10px rgba(0,162,177,0.55); }
+  .btn-solid:hover{ background:var(--teal-deep); transform:translateY(-2px); }
+  .btn-outline{ background:transparent; color:var(--charcoal); border:1.5px solid var(--charcoal); }
+  .btn-outline:hover{ border-color:var(--teal); color:var(--teal-deep); transform:translateY(-2px); }
+
+  /* ---------- reveal-on-scroll ---------- */
+  .reveal{ opacity:0; transform:translateY(28px); transition:opacity .8s cubic-bezier(.22,.61,.36,1), transform .8s cubic-bezier(.22,.61,.36,1); }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+  .stagger .reveal:nth-child(1){ transition-delay:.02s; }
+  .stagger .reveal:nth-child(2){ transition-delay:.07s; }
+  .stagger .reveal:nth-child(3){ transition-delay:.12s; }
+  .stagger .reveal:nth-child(4){ transition-delay:.17s; }
+  .stagger .reveal:nth-child(5){ transition-delay:.22s; }
+  .stagger .reveal:nth-child(6){ transition-delay:.27s; }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; }
+  }
+
+  /* =====================================================  NAV  ===================================================== */
+  .site-nav{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:28px 56px; background:rgba(251,247,238,0.92); backdrop-filter:blur(10px);
+    box-shadow:0 1px 0 var(--line);
+    transition:padding .4s ease, background .4s ease, box-shadow .4s ease;
+  }
+  .site-nav.is-scrolled{ padding:16px 56px; }
+  .nav-logo{ display:flex; align-items:center; gap:8px; font-family:'Fraunces', serif; font-size:22px; font-weight:600; color:var(--charcoal); }
+  .nav-logo .dot{ color:var(--gold); }
+  .nav-logo em{ color:var(--teal); font-style:italic; font-weight:400; }
+  .nav-links{ display:flex; align-items:center; gap:36px; list-style:none; }
+  .nav-links a{ font-size:13px; font-weight:500; color:var(--charcoal); text-decoration:none; position:relative; padding-bottom:4px; }
+  .nav-links a::after{ content:''; position:absolute; left:0; bottom:0; width:0; height:2px; background:var(--gold); transition:width .3s ease; }
+  .nav-links a:hover::after, .nav-links a.active::after{ width:100%; }
+  .nav-links a.active{ color:var(--teal-deep); }
+  .nav-right{ display:flex; align-items:center; gap:24px; }
+  .nav-cta{ font-size:12px; font-weight:600; letter-spacing:0.04em; text-transform:uppercase; color:#fff; background:var(--charcoal); text-decoration:none; padding:11px 22px; border-radius:30px; transition:background .3s ease; white-space:nowrap; }
+  .nav-cta:hover{ background:var(--teal-deep); }
+
+  @media (max-width:980px){
+    .nav-links{ display:none; }
+    .site-nav{ padding:20px 24px; }
+    .site-nav.is-scrolled{ padding:14px 24px; }
+  }
+
+  /* =====================================================  PAGE HEADER  ===================================================== */
+  .page-header{ padding:170px 56px 80px; text-align:center; position:relative; overflow:hidden; }
+  .page-header::before{
+    content:''; position:absolute; inset:0;
+    background:radial-gradient(600px 300px at 15% 0%, rgba(0,162,177,0.10), transparent 70%),
+               radial-gradient(600px 300px at 85% 10%, rgba(239,191,4,0.10), transparent 70%);
+    pointer-events:none;
+  }
+  .page-header .eyebrow{ justify-content:center; }
+  .page-header h1{ font-size:clamp(36px,5vw,62px); line-height:1.08; max-width:16ch; margin:0 auto; }
+  .page-header p{ font-size:17px; line-height:1.7; color:var(--graphite); max-width:60ch; margin:22px auto 0; }
+  .header-marks{ display:flex; justify-content:center; gap:14px; flex-wrap:wrap; margin-top:34px; position:relative; z-index:1; }
+  .header-marks span{ font-size:12px; font-weight:600; color:var(--teal-deep); background:#fff; border:1px solid var(--line); padding:8px 16px; border-radius:20px; }
+
+  @media (max-width:980px){ .page-header{ padding:140px 24px 60px; } }
+
+  /* =====================================================  CATEGORY NAV (JUMP LINKS)  ===================================================== */
+  .cat-nav-wrap{ background:var(--ink); position:sticky; top:0; z-index:60; }
+  .cat-nav{
+    display:flex; gap:10px; overflow-x:auto; padding:16px 56px;
+    scrollbar-width:none;
+  }
+  .cat-nav::-webkit-scrollbar{ display:none; }
+  .cat-nav a{
+    flex-shrink:0; font-size:13px; font-weight:600; letter-spacing:0.02em;
+    color:rgba(251,247,238,0.7); text-decoration:none;
+    padding:9px 18px; border-radius:20px; border:1px solid rgba(251,247,238,0.16);
+    transition:background .25s ease, color .25s ease, border-color .25s ease;
+    white-space:nowrap;
+  }
+  .cat-nav a:hover, .cat-nav a.active{ background:var(--teal); color:#fff; border-color:var(--teal); }
+  @media (max-width:980px){ .cat-nav{ padding:14px 24px; } }
+
+  /* =====================================================  CATEGORY SECTION  ===================================================== */
+  .cat-section{ padding:90px 0; border-bottom:1px solid var(--line); scroll-margin-top:80px; }
+  .cat-section:last-of-type{ border-bottom:none; }
+  .cat-head{ display:flex; align-items:flex-end; justify-content:space-between; gap:30px; flex-wrap:wrap; margin-bottom:44px; }
+  .cat-head .eyebrow{ margin-bottom:10px; }
+  .cat-head h2{ font-size:clamp(26px,3vw,38px); }
+  .cat-head p{ font-size:15px; color:var(--graphite); max-width:50ch; margin-top:10px; line-height:1.65; }
+  .cat-count{
+    font-family:'Fraunces', serif; font-style:italic; font-size:15px; color:var(--teal-deep);
+    background:var(--teal-tint); padding:8px 18px; border-radius:20px; flex-shrink:0;
+  }
+
+  /* ---- product spec cards ---- */
+  .spec-grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:22px; }
+  .spec-card{
+    background:#fff; border:1px solid var(--line); border-radius:16px;
+    overflow:hidden; transition:transform .35s cubic-bezier(.22,.61,.36,1), box-shadow .35s ease;
+  }
+  .spec-card:hover{ transform:translateY(-5px); box-shadow:0 26px 46px -26px rgba(22,33,31,0.25); }
+  .spec-thumb{
+    aspect-ratio:4/3; background:var(--teal-tint);
+    display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden;
+  }
+  .spec-thumb svg{ width:56%; height:56%; opacity:0.85; }
+  .spec-thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .spec-body{ padding:20px 22px 24px; }
+  .spec-body h3{ font-size:17px; font-weight:600; margin-bottom:14px; }
+  .spec-table{ width:100%; border-collapse:collapse; font-size:13px; }
+  .spec-table tr{ border-top:1px solid var(--line); }
+  .spec-table tr:first-child{ border-top:none; }
+  .spec-table td{ padding:8px 0; color:var(--graphite); }
+  .spec-table td:first-child{ font-weight:600; color:var(--charcoal); width:44%; }
+  .spec-table td:last-child{ text-align:right; }
+
+  .spec-inquire{
+    display:flex; align-items:center; justify-content:center; gap:8px;
+    width:100%; margin-top:18px;
+    font-size:12px; font-weight:600; letter-spacing:0.04em; text-transform:uppercase;
+    color:var(--teal-deep); background:var(--teal-tint);
+    border:1px solid transparent; border-radius:30px;
+    padding:11px 16px; text-decoration:none;
+    transition:background .25s ease, color .25s ease, transform .25s ease, box-shadow .25s ease;
+  }
+  .spec-inquire svg{ width:14px; height:14px; flex-shrink:0; }
+  .spec-inquire:hover{ background:var(--teal); color:#fff; transform:translateY(-2px); box-shadow:0 12px 22px -12px rgba(0,162,177,0.55); }
+
+  .spec-card.custom-card{ background:var(--teal-tint); border-style:dashed; border-color:rgba(0,112,125,0.3); }
+  .spec-card.custom-card .spec-inquire{ background:var(--charcoal); color:#fff; margin-top:16px; }
+  .spec-card.custom-card .spec-inquire:hover{ background:var(--teal-deep); }
+
+  @media (max-width:980px){
+    .spec-grid{ grid-template-columns:repeat(2, 1fr); gap:16px; }
+  }
+  @media (max-width:620px){
+    .spec-grid{ grid-template-columns:1fr; }
+    .wrap{ padding:0 22px; }
+    .cat-section{ padding:64px 0; }
+  }
+
+  /* =====================================================  ALL PRODUCTS ARE STRIP  ===================================================== */
+  .badge-row{ display:flex; flex-wrap:wrap; gap:16px; justify-content:center; }
+  .badge-card{
+    flex:1 1 200px; background:#fff; border:1px solid var(--line); border-radius:16px;
+    padding:26px 22px; text-align:center;
+  }
+  .badge-card .icon{ font-size:26px; margin-bottom:10px; }
+  .badge-card h4{ font-family:'Fraunces', serif; font-size:15px; font-weight:600; margin-bottom:4px; }
+  .badge-card p{ font-size:12.5px; color:var(--graphite); line-height:1.5; }
+
+  /* =====================================================  CTA BANNER  ===================================================== */
+  .brochure-banner{
+    display:flex; flex-direction:column; align-items:center; text-align:center;
+    padding:40px 24px; background:var(--ink);
+  }
+  .brochure-banner .eyebrow{ color:rgba(251,247,238,0.6); justify-content:center; }
+  .brochure-banner .eyebrow::before{ background:var(--gold); }
+  .brochure-banner h2{
+    font-family:'Fraunces', serif; font-weight:600; color:#fff;
+    font-size:clamp(28px, 4vw, 50px); max-width:18ch;
+  }
+  .brochure-banner h2 em{ font-style:italic; font-weight:400; color:var(--teal); }
+  .brochure-banner p{
+    font-size:16px; color:rgba(251,247,238,0.75); max-width:46ch;
+    margin:20px 0 40px; line-height:1.7;
+  }
+  .btn-light{ background:var(--cream); color:var(--ink); border:1px solid var(--cream); }
+  .btn-light:hover{ background:var(--gold); border-color:var(--gold); transform:translateY(-2px); }
+  .cta-actions{ display:flex; gap:16px; flex-wrap:wrap; justify-content:center; }
+
+  /* =====================================================  FOOTER  ===================================================== */
+  footer{ background:var(--ink); color:rgba(251,247,238,0.72); padding:80px 0 26px; }
+  .footer-grid{ display:grid; grid-template-columns:1.4fr 1fr 1fr 1.2fr; gap:44px; padding-bottom:56px; border-bottom:1px solid rgba(251,247,238,0.12); }
+  .footer-logo{ font-family:'Fraunces', serif; font-size:22px; font-weight:600; color:#fff; }
+  .footer-logo em{ font-style:italic; color:var(--teal); font-weight:400; }
+  .footer-logo .dot{ color:var(--gold); }
+  .footer-tagline{ font-size:13px; color:rgba(251,247,238,0.55); margin-top:14px; max-width:28ch; line-height:1.6; }
+  .footer-col h4{ font-size:11px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:rgba(251,247,238,0.45); margin-bottom:18px; }
+  .footer-col ul{ list-style:none; display:flex; flex-direction:column; gap:11px; }
+  .footer-col a{ font-size:14px; color:rgba(251,247,238,0.8); text-decoration:none; }
+  .footer-col a:hover{ color:var(--gold); }
+  .footer-col address{ font-style:normal; font-size:14px; line-height:1.8; color:rgba(251,247,238,0.72); }
+  .footer-bottom{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px; padding-top:24px; font-size:12px; color:rgba(251,247,238,0.4); }
+  .footer-marks{ display:flex; gap:16px; flex-wrap:wrap; }
+  .footer-marks span{ padding:5px 12px; border:1px solid rgba(251,247,238,0.18); border-radius:20px; }
+
+  @media (max-width:900px){ .footer-grid{ grid-template-columns:1fr 1fr; gap:36px; } }
+  @media (max-width:560px){ .footer-grid{ grid-template-columns:1fr; } .section-pad{ padding:70px 0; } }
+
+  /* =====================================================  WHATSAPP  ===================================================== */
+  .whatsapp-float{
+    position:fixed; right:26px; bottom:26px; z-index:90;
+    display:flex; align-items:center; gap:10px;
+    background:#1EBE5D; color:#fff; text-decoration:none;
+    padding:14px 18px; border-radius:30px;
+    box-shadow:0 16px 30px -12px rgba(30,190,93,0.55);
+    font-size:13px; font-weight:600;
+    animation:floatBob 3.2s ease-in-out infinite;
+  }
+  .whatsapp-float svg{ width:22px; height:22px; }
+  @keyframes floatBob{ 0%,100%{ transform:translateY(0);} 50%{ transform:translateY(-6px);} }
+  @media (max-width:560px){ .whatsapp-float span{ display:none; } .whatsapp-float{ padding:14px; } }
+
+  @media (max-width:980px){ .wrap{ padding:0 24px; } }
+</style>
+</head>
+<body>
+
+<nav class="site-nav" id="siteNav">
+  <div class="nav-logo">green<span class="dot">•</span><em>gold</em></div>
+  <ul class="nav-links">
+    <li><a href="home.html">Home</a></li>
+    <li><a href="products-green_gold.html" class="active">Products</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="manufacturing.html">Manufacturing</a></li>
+    <li><a href="export.html">Export</a></li>
+    <li><a href="faq.html">FAQ</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="export.html" class="nav-cta">Get a Quote</a>
+  </div>
+</nav>
+
+<!-- ============ PAGE HEADER ============ -->
+<header class="page-header">
+  <div class="wrap" style="padding:0;">
+    <h1>Every size, every shape — <em>sustainably pressed</em></h1>
+    <p>A complete range of 100% compostable sugarcane bagasse tableware — plates, bowls, meal trays, clamshells, cups and takeout containers — built for foodservice at every scale, from street-side counters to export pallets.</p>
+    <div class="header-marks">
+      <span>100% Compostable</span><span>Food-Grade &amp; Toxin-Free</span><span>Microwave-Safe</span><span>Freezer-Safe</span><span>Leak &amp; Oil Resistant</span>
+    </div>
+  </div>
+</header>
+
+<!-- ============ CATEGORY JUMP NAV ============ -->
+<div class="cat-nav-wrap">
+  <div class="cat-nav" id="catNav">
+    <a href="#round-plates">Round Plates</a>
+    <a href="#compartment-plates">Compartment Round Plates</a>
+    <a href="#square-plates">Square Compartment Plates</a>
+    <a href="#bowls">Bowls &amp; Dona</a>
+    <a href="#clamshell">Clamshell</a>
+    <a href="#lids-glass">Lids &amp; Glass</a>
+    <a href="#takeout">Takeout Containers</a>
+  </div>
+</div>
+
+<!-- ============ ROUND PLATES ============ -->
+<section class="cat-section" id="round-plates">
+  <div class="wrap">
+    <div class="cat-head reveal">
+      <div>
+        <h2>Round Plates</h2>
+        <p>Our most versatile format — from full-size dinner plates to compact snack plates — pressed from sugarcane fibre in five sizes.</p>
+      </div>
+      <span class="cat-count">6 sizes</span>
+    </div>
+    <div class="spec-grid stagger">
+
+      <div class="spec-card reveal">
+       <!-- 
+        <div class="spec-thumb">
+          <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="38" fill="none" stroke="#00707D" stroke-width="3"/><circle cx="50" cy="50" r="24" fill="none" stroke="#00A2B1" stroke-width="1.5" opacity="0.6"/></svg>
+        </div>
+      -->
+
+      <!-- New (actual image) -->
+      <div class="spec-thumb">
+        <img src="ChatGPT Image Jul 22, 2026, 12_34_48 PM.png" alt="12&quot; Round Plate">
+      </div>
+        <div class="spec-body">
+          <h3>12" Round Plate</h3>
+          <table class="spec-table">
+            <tr><td>Dimensions</td><td>304mm x 26mm</td></tr>
+            <tr><td>Weight</td><td>24.5gm</td></tr>
+            <tr><td>Packing</td><td>25x20pcs, 500pcs/carton</td></tr>
+          </table>
+          <a href="https://wa.me/917990441625?text=Hi%2C%20I%27m%20interested%20in%20the%2012%22%20Round%20Plate%20%E2%80%94%20could%20you%20share%20pricing%20and%20MOQ%20details%3F" class="spec-inquire" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z" stroke="currentColor" stroke-width="1.4"/><path d="M8.5 9.7c0 3.2 2.6 5.8 5.8 5.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inquire Now</a>
+        </div>
+      </div>
+
+      <div class="spec-card reveal">
+        <div class="spec-thumb">
+          <img src="ChatGPT 11 Round Plate.png" alt="12&quot; Round Plate">     
+        </div>
+        <div class="spec-body">
+          <h3>11" Round Plate</h3>
+          <table class="spec-table">
+            <tr><td>Dimensions</td><td>279mm x 26mm</td></tr>
+            <tr><td>Weight</td><td>21gm</td></tr>
+            <tr><td>Packing</td><td>25x20pcs, 500pcs/carton</td></tr>
+          </table>
+          <a href="https://wa.me/917990441625?text=Hi%2C%20I%27m%20interested%20in%20the%2011%22%20Round%20Plate%20%E2%80%94%20could%20you%20share%20pricing%20and%20MOQ%20details%3F" class="spec-inquire" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z" stroke="currentColor" stroke-width="1.4"/><path d="M8.5 9.7c0 3.2 2.6 5.8 5.8 5.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inquire Now</a>
+        </div>
+      </div>
+
+      <div class="spec-card reveal">
+        <div class="spec-thumb">
+          <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="38" fill="none" stroke="#00707D" stroke-width="3"/><circle cx="50" cy="50" r="24" fill="none" stroke="#00A2B1" stroke-width="1.5" opacity="0.6"/></svg>
+        </div>
+        <div class="spec-body">
+          <h3>10" Round Plate</h3>
+          <table class="spec-table">
+            <tr><td>Dimensions</td><td>254mm x 19.5mm</td></tr>
+            <tr><td>Weight</td><td>18gm</td></tr>
+            <tr><td>Packing</td><td>25x20pcs, 500pcs/carton</td></tr>
+          </table>
+          <a href="https://wa.me/917990441625?text=Hi%2C%20I%27m%20interested%20in%20the%2010%22%20Round%20Plate%20%E2%80%94%20could%20you%20share%20pricing%20and%20MOQ%20details%3F" class="spec-inquire" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z" stroke="currentColor" stroke-width="1.4"/><path d="M8.5 9.7c0 3.2 2.6 5.8 5.8 5.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inquire Now</a>
+        </div>
+      </div>
+
+      <div class="spec-card reveal">
+        <div class="spec-thumb">
+          <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="38" fill="none" stroke="#00707D" stroke-width="3"/><circle cx="50" cy="50" r="24" fill="none" stroke="#00A2B1" stroke-width="1.5" opacity="0.6"/></svg>
+        </div>
+        <div class="spec-body">
+          <h3>9" Round Plate</h3>
+          <table class="spec-table">
+            <tr><td>Dimensions</td><td>220mm x 18mm</td></tr>
+            <tr><td>Weight</td><td>14gm</td></tr>
+            <tr><td>Packing</td><td>25x20pcs, 500pcs/carton</td></tr>
+          </table>
+          <a href="https://wa.me/917990441625?text=Hi%2C%20I%27m%20interested%20in%20the%209%22%20Round%20Plate%20%E2%80%94%20could%20you%20share%20pricing%20and%20MOQ%20details%3F" class="spec-inquire" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z" stroke="currentColor" stroke-width="1.4"/><path d="M8.5 9.7c0 3.2 2.6 5.8 5.8 5.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inquire Now</a>
+        </div>
+      </div>
+
+      <div class="spec-card reveal">
+        <div class="spec-thumb">
+          <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="38" fill="none" stroke="#00707D" stroke-width="3"/><circle cx="50" cy="50" r="24" fill="none" stroke="#00A2B1" stroke-width="1.5" opacity="0.6"/></svg>
+        </div>
+        <div class="spec-body">
+          <h3>7" Round Plate</h3>
+          <table class="spec-table">
+            <tr><td>Dimensions</td><td>180mm x 18mm</td></tr>
+            <tr><td>Weight</td><td>8gm</td></tr>
+            <tr><td>Packing</td><td>25x40pcs, 1000pcs/carton</td></tr>
+          </table>
+          <a href="https://wa.me/917990441625?text=Hi%2C%20I%27m%20interested%20in%20the%207%22%20Round%20Plate%20%E2%80%94%20could%20you%20share%20pricing%20and%20MOQ%20details%3F" class="spec-inquire" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z" stroke="currentColor" stroke-width="1.4"/><path d="M8.5 9.7c0 3.2 2.6 5.8 5.8 5.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inquire Now</a>
+        </div>
+      </div>
+
+      <div class="spec-card reveal">
+        <div class="spec-thumb">
+          <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="38" fill="none" stroke="#00707D" stroke-width="3"/><circle cx="50" cy="50" r="24" fill="none" stroke="#00A2B1" stroke-width="1.5" opacity="0.6"/></svg>
+        </div>
+        <div class="spec-body">
+          <h3>6" Round Plate</h3>
+          <table class="spec-table">
+            <tr><td>Dimensions</td><td>155mm x 15mm</td></tr>
+            <tr><td>Weight</td><td>7gm</td></tr>
+            <tr><td>Packing</td><td>50x20pcs, 1000pcs/carton</td></tr>
+          </table>
+          <a href="https://wa.me/917990441625?text=Hi%2C%20I%27m%20interested%20in%20the%206%22%20Round%20Plate%20%E2%80%94%20could%20you%20share%20pricing%20and%20MOQ%20details%3F" class="spec-inquire" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z" stroke="currentColor" stroke-width="1.4"/><path d="M8.5 9.7c0 3.2 2.6 5.8 5.8 5.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inquire Now</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ COMPARTMENT ROUND PLATES ============ -->
+<section class="cat-section bg-tint" id="compartment-plates">
+  <div class="wrap">
+    <div class="cat-head reveal">
+      <div>
+        <h2>Compartment Round Plates</h2>
+        <p>Divided plates that keep dals, curries and rice neatly separated — ideal for thalis, meal boxes and catering lines.</p>
+      </div>
+      <span class="cat-count">4 sizes</span>
+    </div>
+    <div class="spec-grid stagger">
+
+      <div class="spec-card reveal">
+        <div class="spec-thumb">
+          <img src="ChatGPT 12 4CP Round Plate.png" alt="12&quot; Round Plate">     
+        </div>
+        <div class="spec-body">
+          <h3>12" 4CP Round Plate</h3>
+          <table class="spec-table">
+            <tr><td>Dimensions</td><td>300mm x 25mm</td></tr>
+            <tr><td>Weight</td><td>26gm</td></tr>
+            <tr><td>Packing</td><td>25x20pcs, 500pcs/carton</td></tr>
+          </table>
+          <a href="https://wa.me/917990441625?text=Hi%2C%20I%27m%20interested%20in%20the%2012%22%204CP%20Round%20Plate%20%E2%80%94%20could%20you%20share%20pricing%20and%20MOQ%20details%3F" class="spec-inquire" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z" stroke="currentColor" stroke-width="1.4"/><path d="M8.5 9.7c0 3.2 2.6 5.8 5.8 5.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inquire Now</a>
+        </div>
+      </div>
+
+      <div class="spec-card reveal">
+        <div class="spec-thumb">
+          <img src="chatgpt 11 4CP Round Plate.png" alt="12&quot; Round Plate">     
+        </div>
+        <div class="spec-body">
+          <h3>11" 4CP Round Plate</h3>
+          <table class="spec-table">
+            <tr><td>Dimensions</td><td>272mm x 28mm</td></tr>
+            <tr><td>Weight</td><td>24gm</td></tr>
+            <tr><td>Packing</td><td>25x20pcs, 500pcs/carton</td></tr>
+          </table>
+          <a href="https://wa.me/917990441625?text=Hi%2C%20I%27m%20interested%20in%20the%2011%22%204CP%20Round%20Plate%20%E2%80%94%20could%20you%20share%20pricing%20and%20MOQ%20details%3F" class="spec-inquire" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z" stroke="currentColor" stroke-width="1.4"/><path d="M8.5 9.7c0 3.2 2.6 5.8 5.8 5.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inquire Now</a>
+        </div>
+      </div>
+
+      <div class="spec-card reveal">
+        <div class="spec-thumb">
+          <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="38" fill="none" stroke="#00707D" stroke-width="3"/><path d="M50 15 L50 85 M50 50 L18 65 M50 50 L82 65" stroke="#00A2B1" stroke-width="2"/></svg>
+        </div>
+        <div class="spec-body">
+          <h3>10" 3CP Round Plate</h3>
+          <table class="spec-table">
+            <tr><td>Dimensions</td><td>255mm x 24mm</td></tr>
+            <tr><td>Weight</td><td>19gm</td></tr>
+            <tr><td>Packing</td><td>25x20pcs, 500pcs/carton</td></tr>
+          </table>
+          <a href="https://wa.me/917990441625?text=Hi%2C%20I%27m%20interested%20in%20the%2010%22%203CP%20Round%20Plate%20%E2%80%94%20could%20you%20share%20pricing%20and%20MOQ%20details%3F" class="spec-inquire" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z" stroke="currentColor" stroke-width="1.4"/><path d="M8.5 9.7c0 3.2 2.6 5.8 5.8 5.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inquire Now</a>
+        </div>
+      </div>
+
+      <div class="spec-card reveal">
+        <div class="spec-thumb">
+          <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="38" fill="none" stroke="#00707D" stroke-width="3"/><path d="M50 15 L50 85 M50 50 L18 65 M50 50 L82 65" stroke="#00A2B1" stroke-width="2"/></svg>
+        </div>
+        <div class="spec-body">
+          <h3>9" 3CP Round Plate</h3>
+          <table class="spec-table">
+            <tr><td>Dimensions</td><td>225mm x 21mm</td></tr>
+            <tr><td>Weight</td><td>15gm</td></tr>
+            <tr><td>Packing</td><td>25x20pcs, 500pcs/carton</td></tr>
+          </table>
+          <a href="https://wa.me/917990441625?text=Hi%2C%20I%27m%20interested%20in%20the%209%22%203CP%20Round%20Plate%20%E2%80%94%20could%20you%20share%20pricing%20and%20MOQ%20details%3F" class="spec-inquire" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z" stroke="currentColor" stroke-width="1.4"/><path d="M8.5 9.7c0 3.2 2.6 5.8 5.8 5.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inquire Now</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ SQUARE COMPARTMENT PLATES ============ -->
+<section class="cat-section" id="square-plates">
+  <div class="wrap">
+    <div class="cat-head reveal">
+      <div>
+        <h2>Square Compartment Plates</h2>
+        <p>Square-format meal trays for dosas, thalis and multi-course meals, available with three, four, five, six and nine compartments.</p>
+      </div>
+      <span class="cat-count">6 sizes</span>
+    </div>
+    <div class="spec-grid stagger">
+
+      <div class="spec-card reveal">
+        <div class="spec-thumb">
+          <img src="ChatGPT 1-D Tray.png" alt="12&quot; Round Plate">     
+        </div>
+        <div class="spec-body">
+          <h3>1-D Tray</h3>
+          <table class="spec-table">
+            <tr><td>Dimensions</td><td>150mm x 21mm</td></tr>
+            <tr><td>Weight</td><td>7gm</td></tr>
+            <tr><td>Packing</td><td>50x30pcs, 1500pcs/carton</td></tr>
+          </table>
+          <a href="https://wa.me/917990441625?text=Hi%2C%20I%27m%20interested%20in%20the%201-D%20Tray%20%E2%80%94%20could%20you%20share%20pricing%20and%20MOQ%20details%3F" class="spec-inquire" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z" stroke="currentColor" stroke-width="1.4"/><path d="M8.5 9.7c0 3.2 2.6 5.8 5.8 5.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inquire Now</a>
+        </div>
+      </div>
+
+      <div class="spec-card reveal">
+        <div class="spec-thumb">
+          <img src="ChatGPT 9 3CP Square Plate.png" alt="12&quot; Round Plate">     
+        </div>
+        <div class="spec-body">
+          <h3>9" 3CP Square Plate</h3>
+          <table class="spec-table">
+            <tr><td>Dimensions</td><td>215mm x 215mm x 24mm</td></tr>
+            <tr><td>Weight</td><td>19gm</td></tr>
+            <tr><td>Packing</td><td>25x20pcs, 500pcs/carton</td></tr>
+          </table>
+          <a href="https://wa.me/917990441625?text=Hi%2C%20I%27m%20interested%20in%20the%209%22%203CP%20Square%20Plate%20%E2%80%94%20could%20you%20share%20pricing%20and%20MOQ%20details%3F" class="spec-inquire" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z" stroke="currentColor" stroke-width="1.4"/><path d="M8.5 9.7c0 3.2 2.6 5.8 5.8 5.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inquire Now</a>
+        </div>
+      </div>
+
+      <div class="spec-card reveal">
+        <div class="spec-thumb">
+          <svg viewBox="0 0 100 100"><rect x="14" y="14" width="72" height="72" fill="none" stroke="#00707D" stroke-width="3"/><path d="M50 14 L50 86 M50 50 L14 65" stroke="#00A2B1" stroke-width="2"/></svg>
+        </div>
+        <div class="spec-body">
+          <h3>10" 3CP Square Plate</h3>
+          <table class="spec-table">
+            <tr><td>Dimensions</td><td>247mm x 233mm x 26.5mm</td></tr>
+            <tr><td>Weight</td><td>21gm</td></tr>
+            <tr><td>Packing</td><td>25x20pcs, 500pcs/carton</td></tr>
+          </table>
+          <a href="https://wa.me/917990441625?text=Hi%2C%20I%27m%20interested%20in%20the%2010%22%203CP%20Square%20Plate%20%E2%80%94%20could%20you%20share%20pricing%20and%20MOQ%20details%3F" class="spec-inquire" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z" stroke="currentColor" stroke-width="1.4"/><path d="M8.5 9.7c0 3.2 2.6 5.8 5.8 5.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inquire Now</a>
+        </div>
+      </div>
+
+      <div class="spec-card reveal">
+        <div class="spec-thumb">
+          <svg viewBox="0 0 100 100"><rect x="14" y="14" width="72" height="72" fill="none" stroke="#00707D" stroke-width="3"/><path d="M14 40 L86 40 M14 65 L86 65 M50 14 L50 86" stroke="#00A2B1" stroke-width="2"/></svg>
+        </div>
+        <div class="spec-body">
+          <h3>5CP Meal Tray</h3>
+          <table class="spec-table">
+            <tr><td>Dimensions</td><td>150mm x 21mm</td></tr>
+            <tr><td>Weight</td><td>7gm</td></tr>
+            <tr><td>Packing</td><td>50x30pcs, 1500pcs/carton</td></tr>
+          </table>
+          <a href="https://wa.me/917990441625?text=Hi%2C%20I%27m%20interested%20in%20the%205CP%20Meal%20Tray%20%E2%80%94%20could%20you%20share%20pricing%20and%20MOQ%20details%3F" class="spec-inquire" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z" stroke="currentColor" stroke-width="1.4"/><path d="M8.5 9.7c0 3.2 2.6 5.8 5.8 5.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inquire Now</a>
+        </div>
+      </div>
+
+      <div class="spec-card reveal">
+        <div class="spec-thumb">
+          <svg viewBox="0 0 100 100"><rect x="14" y="14" width="72" height="72" fill="none" stroke="#00707D" stroke-width="3"/><path d="M14 40 L86 40 M14 65 L86 65 M50 14 L50 86" stroke="#00A2B1" stroke-width="2"/></svg>
+        </div>
+        <div class="spec-body">
+          <h3>6CP Meal Tray</h3>
+          <table class="spec-table">
+            <tr><td>Dimensions</td><td>304mm x 228mm x 33mm</td></tr>
+            <tr><td>Weight</td><td>37gm</td></tr>
+            <tr><td>Packing</td><td>25x16pcs, 400pcs/carton</td></tr>
+          </table>
+          <a href="https://wa.me/917990441625?text=Hi%2C%20I%27m%20interested%20in%20the%206CP%20Meal%20Tray%20%E2%80%94%20could%20you%20share%20pricing%20and%20MOQ%20details%3F" class="spec-inquire" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z" stroke="currentColor" stroke-width="1.4"/><path d="M8.5 9.7c0 3.2 2.6 5.8 5.8 5.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inquire Now</a>
+        </div>
+      </div>
+
+      <div class="spec-card reveal">
+        <div class="spec-thumb">
+          <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="38" fill="none" stroke="#00707D" stroke-width="3"/><circle cx="50" cy="50" r="16" fill="none" stroke="#00A2B1" stroke-width="1.5"/><path d="M50 12 L50 34 M50 66 L50 88 M12 50 L34 50 M66 50 L88 50" stroke="#00A2B1" stroke-width="1.5"/></svg>
+        </div>
+        <div class="spec-body">
+          <h3>9CP Round Plate</h3>
+          <table class="spec-table">
+            <tr><td>Dimensions</td><td>318mm x 25.5mm</td></tr>
+            <tr><td>Weight</td><td>62gm</td></tr>
+            <tr><td>Packing</td><td>25x8pcs, 200pcs/carton</td></tr>
+          </table>
+          <a href="https://wa.me/917990441625?text=Hi%2C%20I%27m%20interested%20in%20the%209CP%20Round%20Plate%20%E2%80%94%20could%20you%20share%20pricing%20and%20MOQ%20details%3F" class="spec-inquire" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z" stroke="currentColor" stroke-width="1.4"/><path d="M8.5 9.7c0 3.2 2.6 5.8 5.8 5.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inquire Now</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ BOWLS ============ -->
+<section class="cat-section bg-tint" id="bowls">
+  <div class="wrap">
+    <div class="cat-head reveal">
+      <div>
+        <h2>Bowls &amp; Dona</h2>
+        <p>Round bowls in three volumes plus the traditional square dona — perfect for curries, snacks, sides and street food.</p>
+      </div>
+      <span class="cat-count">4 sizes</span>
+    </div>
+    <div class="spec-grid stagger">
+
+      <div class="spec-card reveal">
+        <div class="spec-thumb">
+          <svg viewBox="0 0 100 100"><path d="M22 40 Q22 78 50 78 Q78 78 78 40" fill="none" stroke="#00707D" stroke-width="3"/><ellipse cx="50" cy="40" rx="28" ry="8" fill="none" stroke="#00A2B1" stroke-width="2"/></svg>
+        </div>
+        <div class="spec-body">
+          <h3>180ml Bowl</h3>
+          <table class="spec-table">
+            <tr><td>Dimensions</td><td>107mm x 40mm</td></tr>
+            <tr><td>Weight</td><td>5gm</td></tr>
+            <tr><td>Packing</td><td>50x20pcs, 1000pcs/carton</td></tr>
+          </table>
+          <a href="https://wa.me/917990441625?text=Hi%2C%20I%27m%20interested%20in%20the%20180ml%20Bowl%20%E2%80%94%20could%20you%20share%20pricing%20and%20MOQ%20details%3F" class="spec-inquire" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z" stroke="currentColor" stroke-width="1.4"/><path d="M8.5 9.7c0 3.2 2.6 5.8 5.8 5.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inquire Now</a>
+        </div>
+      </div>
+
+      <div class="spec-card reveal">
+        <div class="spec-thumb">
+          <svg viewBox="0 0 100 100"><path d="M22 40 Q22 78 50 78 Q78 78 78 40" fill="none" stroke="#00707D" stroke-width="3"/><ellipse cx="50" cy="40" rx="28" ry="8" fill="none" stroke="#00A2B1" stroke-width="2"/></svg>
+        </div>
+        <div class="spec-body">
+          <h3>240ml Bowl</h3>
+          <table class="spec-table">
+            <tr><td>Dimensions</td><td>134mm x 39mm</td></tr>
+            <tr><td>Weight</td><td>7gm</td></tr>
+            <tr><td>Packing</td><td>50x20pcs, 1000pcs/carton</td></tr>
+          </table>
+          <a href="https://wa.me/917990441625?text=Hi%2C%20I%27m%20interested%20in%20the%20240ml%20Bowl%20%E2%80%94%20could%20you%20share%20pricing%20and%20MOQ%20details%3F" class="spec-inquire" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z" stroke="currentColor" stroke-width="1.4"/><path d="M8.5 9.7c0 3.2 2.6 5.8 5.8 5.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inquire Now</a>
+        </div>
+      </div>
+
+      <div class="spec-card reveal">
+        <div class="spec-thumb">
+          <svg viewBox="0 0 100 100"><path d="M18 38 Q18 80 50 80 Q82 80 82 38" fill="none" stroke="#00707D" stroke-width="3"/><ellipse cx="50" cy="38" rx="32" ry="8" fill="none" stroke="#00A2B1" stroke-width="2"/></svg>
+        </div>
+        <div class="spec-body">
+          <h3>350ml Bowl</h3>
+          <table class="spec-table">
+            <tr><td>Dimensions</td><td>145mm x 38.8mm</td></tr>
+            <tr><td>Weight</td><td>8gm</td></tr>
+            <tr><td>Packing</td><td>50x20pcs, 1000pcs/carton</td></tr>
+          </table>
+          <a href="https://wa.me/917990441625?text=Hi%2C%20I%27m%20interested%20in%20the%20350ml%20Bowl%20%E2%80%94%20could%20you%20share%20pricing%20and%20MOQ%20details%3F" class="spec-inquire" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z" stroke="currentColor" stroke-width="1.4"/><path d="M8.5 9.7c0 3.2 2.6 5.8 5.8 5.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inquire Now</a>
+        </div>
+      </div>
+
+      <div class="spec-card reveal">
+        <div class="spec-thumb">
+          <svg viewBox="0 0 100 100"><rect x="20" y="20" width="60" height="60" rx="10" fill="none" stroke="#00707D" stroke-width="3"/></svg>
+        </div>
+        <div class="spec-body">
+          <h3>Dona</h3>
+          <table class="spec-table">
+            <tr><td>Dimensions</td><td>104mm x 104mm x 29.6mm</td></tr>
+            <tr><td>Weight</td><td>5gm</td></tr>
+            <tr><td>Packing</td><td>50x60pcs, 3000pcs/carton</td></tr>
+          </table>
+          <a href="https://wa.me/917990441625?text=Hi%2C%20I%27m%20interested%20in%20the%20Dona%20%E2%80%94%20could%20you%20share%20pricing%20and%20MOQ%20details%3F" class="spec-inquire" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z" stroke="currentColor" stroke-width="1.4"/><path d="M8.5 9.7c0 3.2 2.6 5.8 5.8 5.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inquire Now</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ CLAMSHELL ============ -->
+<section class="cat-section" id="clamshell">
+  <div class="wrap">
+    <div class="cat-head reveal">
+      <div>
+        <h2>Clamshell Containers</h2>
+        <p>Hinged-lid takeout boxes across six sizes, with plain and 3-compartment options — leak-resistant and freezer-to-microwave safe.</p>
+      </div>
+      <span class="cat-count">6 sizes</span>
+    </div>
+    <div class="spec-grid stagger">
+
+      <div class="spec-card reveal">
+        <div class="spec-thumb">
+          <svg viewBox="0 0 100 100"><path d="M14 55 h72 v28 h-72 z M14 55 Q14 25 50 25 Q86 25 86 55" fill="none" stroke="#00707D" stroke-width="3"/></svg>
+        </div>
+        <div class="spec-body">
+          <h3>9x9 – 3CP Clamshell</h3>
+          <table class="spec-table">
+            <tr><td>Dimensions</td><td>230mm x 230mm x 50mm</td></tr>
+            <tr><td>Weight</td><td>44gm</td></tr>
+            <tr><td>Packing</td><td>200pcs/carton</td></tr>
+          </table>
+          <a href="https://wa.me/917990441625?text=Hi%2C%20I%27m%20interested%20in%20the%209x9%20%E2%80%93%203CP%20Clamshell%20%E2%80%94%20could%20you%20share%20pricing%20and%20MOQ%20details%3F" class="spec-inquire" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z" stroke="currentColor" stroke-width="1.4"/><path d="M8.5 9.7c0 3.2 2.6 5.8 5.8 5.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inquire Now</a>
+        </div>
+      </div>
+
+      <div class="spec-card reveal">
+        <div class="spec-thumb">
+          <svg viewBox="0 0 100 100"><path d="M14 55 h72 v28 h-72 z M14 55 Q14 25 50 25 Q86 25 86 55" fill="none" stroke="#00707D" stroke-width="3"/></svg>
+        </div>
+        <div class="spec-body">
+          <h3>9x9 Clamshell</h3>
+          <table class="spec-table">
+            <tr><td>Dimensions</td><td>230mm x 230mm x 45mm</td></tr>
+            <tr><td>Weight</td><td>44gm</td></tr>
+            <tr><td>Packing</td><td>200pcs/carton</td></tr>
+          </table>
+          <a href="https://wa.me/917990441625?text=Hi%2C%20I%27m%20interested%20in%20the%209x9%20Clamshell%20%E2%80%94%20could%20you%20share%20pricing%20and%20MOQ%20details%3F" class="spec-inquire" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z" stroke="currentColor" stroke-width="1.4"/><path d="M8.5 9.7c0 3.2 2.6 5.8 5.8 5.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inquire Now</a>
+        </div>
+      </div>
+
+      <div class="spec-card reveal">
+        <div class="spec-thumb">
+          <svg viewBox="0 0 100 100"><path d="M14 55 h72 v28 h-72 z M14 55 Q14 25 50 25 Q86 25 86 55" fill="none" stroke="#00707D" stroke-width="3"/></svg>
+        </div>
+        <div class="spec-body">
+          <h3>9x6 Clamshell</h3>
+          <table class="spec-table">
+            <tr><td>Dimensions</td><td>152.5mm x 229.4mm x 41.19mm</td></tr>
+            <tr><td>Weight</td><td>30gm</td></tr>
+            <tr><td>Packing</td><td>250pcs/carton</td></tr>
+          </table>
+          <a href="https://wa.me/917990441625?text=Hi%2C%20I%27m%20interested%20in%20the%209x6%20Clamshell%20%E2%80%94%20could%20you%20share%20pricing%20and%20MOQ%20details%3F" class="spec-inquire" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z" stroke="currentColor" stroke-width="1.4"/><path d="M8.5 9.7c0 3.2 2.6 5.8 5.8 5.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inquire Now</a>
+        </div>
+      </div>
+
+      <div class="spec-card reveal">
+        <div class="spec-thumb">
+          <svg viewBox="0 0 100 100"><path d="M14 55 h72 v28 h-72 z M14 55 Q14 25 50 25 Q86 25 86 55" fill="none" stroke="#00707D" stroke-width="3"/></svg>
+        </div>
+        <div class="spec-body">
+          <h3>6x6 Clamshell</h3>
+          <table class="spec-table">
+            <tr><td>Dimensions</td><td>152mm x 149.5mm x 41mm</td></tr>
+            <tr><td>Weight</td><td>21gm</td></tr>
+            <tr><td>Packing</td><td>500pcs/carton</td></tr>
+          </table>
+          <a href="https://wa.me/917990441625?text=Hi%2C%20I%27m%20interested%20in%20the%206x6%20Clamshell%20%E2%80%94%20could%20you%20share%20pricing%20and%20MOQ%20details%3F" class="spec-inquire" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z" stroke="currentColor" stroke-width="1.4"/><path d="M8.5 9.7c0 3.2 2.6 5.8 5.8 5.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inquire Now</a>
+        </div>
+      </div>
+
+      <div class="spec-card reveal">
+        <div class="spec-thumb">
+          <svg viewBox="0 0 100 100"><path d="M14 55 h72 v28 h-72 z M14 55 Q14 25 50 25 Q86 25 86 55" fill="none" stroke="#00707D" stroke-width="3"/></svg>
+        </div>
+        <div class="spec-body">
+          <h3>8x8 Clamshell</h3>
+          <table class="spec-table">
+            <tr><td>Dimensions</td><td>205mm x 210.3mm x 49.8mm</td></tr>
+            <tr><td>Weight</td><td>37gm</td></tr>
+            <tr><td>Packing</td><td>200pcs/carton</td></tr>
+          </table>
+          <a href="https://wa.me/917990441625?text=Hi%2C%20I%27m%20interested%20in%20the%208x8%20Clamshell%20%E2%80%94%20could%20you%20share%20pricing%20and%20MOQ%20details%3F" class="spec-inquire" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z" stroke="currentColor" stroke-width="1.4"/><path d="M8.5 9.7c0 3.2 2.6 5.8 5.8 5.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inquire Now</a>
+        </div>
+      </div>
+
+      <div class="spec-card reveal">
+        <div class="spec-thumb">
+          <svg viewBox="0 0 100 100"><path d="M14 55 h72 v28 h-72 z M14 55 Q14 25 50 25 Q86 25 86 55" fill="none" stroke="#00707D" stroke-width="3"/></svg>
+        </div>
+        <div class="spec-body">
+          <h3>8x8 – 3CP Clamshell</h3>
+          <table class="spec-table">
+            <tr><td>Dimensions</td><td>204mm x 210mm x 49.8mm</td></tr>
+            <tr><td>Weight</td><td>37gm</td></tr>
+            <tr><td>Packing</td><td>200pcs/carton</td></tr>
+          </table>
+          <a href="https://wa.me/917990441625?text=Hi%2C%20I%27m%20interested%20in%20the%208x8%20%E2%80%93%203CP%20Clamshell%20%E2%80%94%20could%20you%20share%20pricing%20and%20MOQ%20details%3F" class="spec-inquire" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z" stroke="currentColor" stroke-width="1.4"/><path d="M8.5 9.7c0 3.2 2.6 5.8 5.8 5.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inquire Now</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ LIDS & GLASS ============ -->
+<section class="cat-section bg-tint" id="lids-glass">
+  <div class="wrap">
+    <div class="cat-head reveal">
+      <div>
+        <h2>Lids &amp; Glass</h2>
+        <p>Sip lids and drinking cups sized for hot beverages, juices and cold drinks.</p>
+      </div>
+      <span class="cat-count">3 sizes</span>
+    </div>
+    <div class="spec-grid stagger">
+
+      <div class="spec-card reveal">
+        <div class="spec-thumb">
+          <svg viewBox="0 0 100 100"><ellipse cx="50" cy="50" rx="36" ry="30" fill="none" stroke="#00707D" stroke-width="3"/><ellipse cx="50" cy="50" rx="22" ry="18" fill="none" stroke="#00A2B1" stroke-width="1.5" opacity="0.6"/></svg>
+        </div>
+        <div class="spec-body">
+          <h3>90mm Lid</h3>
+          <table class="spec-table">
+            <tr><td>Dimensions</td><td>93.6mm x 24.6mm</td></tr>
+            <tr><td>Weight</td><td>4.5gm</td></tr>
+            <tr><td>Packing</td><td>50x40pcs, 2000pcs/carton</td></tr>
+          </table>
+          <a href="https://wa.me/917990441625?text=Hi%2C%20I%27m%20interested%20in%20the%2090mm%20Lid%20%E2%80%94%20could%20you%20share%20pricing%20and%20MOQ%20details%3F" class="spec-inquire" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z" stroke="currentColor" stroke-width="1.4"/><path d="M8.5 9.7c0 3.2 2.6 5.8 5.8 5.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inquire Now</a>
+        </div>
+      </div>
+
+      <div class="spec-card reveal">
+        <div class="spec-thumb">
+          <svg viewBox="0 0 100 100"><ellipse cx="50" cy="50" rx="36" ry="30" fill="none" stroke="#00707D" stroke-width="3"/><ellipse cx="50" cy="50" rx="22" ry="18" fill="none" stroke="#00A2B1" stroke-width="1.5" opacity="0.6"/></svg>
+        </div>
+        <div class="spec-body">
+          <h3>80mm Lid</h3>
+          <table class="spec-table">
+            <tr><td>Dimensions</td><td>84.3mm x 24.9mm</td></tr>
+            <tr><td>Weight</td><td>5.5gm</td></tr>
+            <tr><td>Packing</td><td>50x40pcs, 2000pcs/carton</td></tr>
+          </table>
+          <a href="https://wa.me/917990441625?text=Hi%2C%20I%27m%20interested%20in%20the%2080mm%20Lid%20%E2%80%94%20could%20you%20share%20pricing%20and%20MOQ%20details%3F" class="spec-inquire" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z" stroke="currentColor" stroke-width="1.4"/><path d="M8.5 9.7c0 3.2 2.6 5.8 5.8 5.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inquire Now</a>
+        </div>
+      </div>
+
+      <div class="spec-card reveal">
+        <div class="spec-thumb">
+          <svg viewBox="0 0 100 100"><path d="M32 22 L68 22 L60 78 L40 78 Z" fill="none" stroke="#00707D" stroke-width="3"/></svg>
+        </div>
+        <div class="spec-body">
+          <h3>240ml Glass</h3>
+          <table class="spec-table">
+            <tr><td>Dimensions</td><td>89.5mm x 75.5mm</td></tr>
+            <tr><td>Weight</td><td>9gm</td></tr>
+            <tr><td>Packing</td><td>50x20pcs, 1000pcs/carton</td></tr>
+          </table>
+          <a href="https://wa.me/917990441625?text=Hi%2C%20I%27m%20interested%20in%20the%20240ml%20Glass%20%E2%80%94%20could%20you%20share%20pricing%20and%20MOQ%20details%3F" class="spec-inquire" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z" stroke="currentColor" stroke-width="1.4"/><path d="M8.5 9.7c0 3.2 2.6 5.8 5.8 5.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inquire Now</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ TAKEOUT CONTAINERS ============ -->
+<section class="cat-section" id="takeout">
+  <div class="wrap">
+    <div class="cat-head reveal">
+      <div>
+        <h2>Takeout Containers</h2>
+        <p>Rectangular and round meal containers with matching lids, built for delivery and takeaway — rice, noodles, curries and combo meals.</p>
+      </div>
+      <span class="cat-count">8 items</span>
+    </div>
+    <div class="spec-grid stagger">
+
+      <div class="spec-card reveal">
+        <div class="spec-thumb">
+          <svg viewBox="0 0 100 100"><rect x="16" y="30" width="68" height="44" rx="6" fill="none" stroke="#00707D" stroke-width="3"/></svg>
+        </div>
+        <div class="spec-body">
+          <h3>500ml Rectangular Container</h3>
+          <table class="spec-table">
+            <tr><td>Dimensions</td><td>182mm x 142mm x 45mm</td></tr>
+            <tr><td>Weight</td><td>19gm</td></tr>
+            <tr><td>Packing</td><td>100x6pcs, 600pcs/carton</td></tr>
+          </table>
+          <a href="https://wa.me/917990441625?text=Hi%2C%20I%27m%20interested%20in%20the%20500ml%20Rectangular%20Container%20%E2%80%94%20could%20you%20share%20pricing%20and%20MOQ%20details%3F" class="spec-inquire" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z" stroke="currentColor" stroke-width="1.4"/><path d="M8.5 9.7c0 3.2 2.6 5.8 5.8 5.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inquire Now</a>
+        </div>
+      </div>
+
+      <div class="spec-card reveal">
+        <div class="spec-thumb">
+          <svg viewBox="0 0 100 100"><rect x="16" y="42" width="68" height="18" rx="4" fill="none" stroke="#00A2B1" stroke-width="3"/></svg>
+        </div>
+        <div class="spec-body">
+          <h3>500ml Rectangular Container Lid</h3>
+          <table class="spec-table">
+            <tr><td>Dimensions</td><td>180mm x 141mm x 8mm</td></tr>
+            <tr><td>Weight</td><td>12gm</td></tr>
+            <tr><td>Packing</td><td>100x6pcs, 600pcs/carton</td></tr>
+          </table>
+          <a href="https://wa.me/917990441625?text=Hi%2C%20I%27m%20interested%20in%20the%20500ml%20Rectangular%20Container%20Lid%20%E2%80%94%20could%20you%20share%20pricing%20and%20MOQ%20details%3F" class="spec-inquire" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z" stroke="currentColor" stroke-width="1.4"/><path d="M8.5 9.7c0 3.2 2.6 5.8 5.8 5.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inquire Now</a>
+        </div>
+      </div>
+
+      <div class="spec-card reveal">
+        <div class="spec-thumb">
+          <svg viewBox="0 0 100 100"><rect x="12" y="26" width="76" height="50" rx="6" fill="none" stroke="#00707D" stroke-width="3"/></svg>
+        </div>
+        <div class="spec-body">
+          <h3>750ml Rectangular Container</h3>
+          <table class="spec-table">
+            <tr><td>Dimensions</td><td>152mm x 197mm x 57mm</td></tr>
+            <tr><td>Weight</td><td>23gm</td></tr>
+            <tr><td>Packing</td><td>100x6pcs, 600pcs/carton</td></tr>
+          </table>
+          <a href="https://wa.me/917990441625?text=Hi%2C%20I%27m%20interested%20in%20the%20750ml%20Rectangular%20Container%20%E2%80%94%20could%20you%20share%20pricing%20and%20MOQ%20details%3F" class="spec-inquire" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z" stroke="currentColor" stroke-width="1.4"/><path d="M8.5 9.7c0 3.2 2.6 5.8 5.8 5.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inquire Now</a>
+        </div>
+      </div>
+
+      <div class="spec-card reveal">
+        <div class="spec-thumb">
+          <svg viewBox="0 0 100 100"><rect x="12" y="42" width="76" height="18" rx="4" fill="none" stroke="#00A2B1" stroke-width="3"/></svg>
+        </div>
+        <div class="spec-body">
+          <h3>750ml Rectangular Container Lid</h3>
+          <table class="spec-table">
+            <tr><td>Dimensions</td><td>196mm x 153mm x 8mm</td></tr>
+            <tr><td>Weight</td><td>13gm</td></tr>
+            <tr><td>Packing</td><td>100x6pcs, 600pcs/carton</td></tr>
+          </table>
+          <a href="https://wa.me/917990441625?text=Hi%2C%20I%27m%20interested%20in%20the%20750ml%20Rectangular%20Container%20Lid%20%E2%80%94%20could%20you%20share%20pricing%20and%20MOQ%20details%3F" class="spec-inquire" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z" stroke="currentColor" stroke-width="1.4"/><path d="M8.5 9.7c0 3.2 2.6 5.8 5.8 5.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inquire Now</a>
+        </div>
+      </div>
+
+      <div class="spec-card reveal">
+        <div class="spec-thumb">
+          <svg viewBox="0 0 100 100"><path d="M20 40 Q20 78 50 78 Q80 78 80 40" fill="none" stroke="#00707D" stroke-width="3"/><ellipse cx="50" cy="40" rx="30" ry="8" fill="none" stroke="#00A2B1" stroke-width="2"/></svg>
+        </div>
+        <div class="spec-body">
+          <h3>500ml Round Bowl</h3>
+          <table class="spec-table">
+            <tr><td>Dimensions</td><td>158mm x 56mm</td></tr>
+            <tr><td>Weight</td><td>15.5gm</td></tr>
+            <tr><td>Packing</td><td>100x6pcs, 600pcs/carton</td></tr>
+          </table>
+          <a href="https://wa.me/917990441625?text=Hi%2C%20I%27m%20interested%20in%20the%20500ml%20Round%20Bowl%20%E2%80%94%20could%20you%20share%20pricing%20and%20MOQ%20details%3F" class="spec-inquire" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z" stroke="currentColor" stroke-width="1.4"/><path d="M8.5 9.7c0 3.2 2.6 5.8 5.8 5.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inquire Now</a>
+        </div>
+      </div>
+
+      <div class="spec-card reveal">
+        <div class="spec-thumb">
+          <svg viewBox="0 0 100 100"><ellipse cx="50" cy="50" rx="34" ry="14" fill="none" stroke="#00A2B1" stroke-width="3"/></svg>
+        </div>
+        <div class="spec-body">
+          <h3>500ml Round Bowl Lid</h3>
+          <table class="spec-table">
+            <tr><td>Dimensions</td><td>157mm x 7mm</td></tr>
+            <tr><td>Weight</td><td>10gm</td></tr>
+            <tr><td>Packing</td><td>100x6pcs, 600pcs/carton</td></tr>
+          </table>
+          <a href="https://wa.me/917990441625?text=Hi%2C%20I%27m%20interested%20in%20the%20500ml%20Round%20Bowl%20Lid%20%E2%80%94%20could%20you%20share%20pricing%20and%20MOQ%20details%3F" class="spec-inquire" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z" stroke="currentColor" stroke-width="1.4"/><path d="M8.5 9.7c0 3.2 2.6 5.8 5.8 5.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inquire Now</a>
+        </div>
+      </div>
+
+      <div class="spec-card reveal">
+        <div class="spec-thumb">
+          <svg viewBox="0 0 100 100"><path d="M18 38 Q18 80 50 80 Q82 80 82 38" fill="none" stroke="#00707D" stroke-width="3"/><ellipse cx="50" cy="38" rx="32" ry="8" fill="none" stroke="#00A2B1" stroke-width="2"/></svg>
+        </div>
+        <div class="spec-body">
+          <h3>750ml Round Bowl</h3>
+          <table class="spec-table">
+            <tr><td>Dimensions</td><td>175mm x 65mm</td></tr>
+            <tr><td>Weight</td><td>18gm</td></tr>
+            <tr><td>Packing</td><td>100x6pcs, 600pcs/carton</td></tr>
+          </table>
+          <a href="https://wa.me/917990441625?text=Hi%2C%20I%27m%20interested%20in%20the%20750ml%20Round%20Bowl%20%E2%80%94%20could%20you%20share%20pricing%20and%20MOQ%20details%3F" class="spec-inquire" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z" stroke="currentColor" stroke-width="1.4"/><path d="M8.5 9.7c0 3.2 2.6 5.8 5.8 5.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inquire Now</a>
+        </div>
+      </div>
+
+      <div class="spec-card reveal">
+        <div class="spec-thumb">
+          <svg viewBox="0 0 100 100"><ellipse cx="50" cy="50" rx="34" ry="14" fill="none" stroke="#00A2B1" stroke-width="3"/></svg>
+        </div>
+        <div class="spec-body">
+          <h3>750ml Round Bowl Lid</h3>
+          <table class="spec-table">
+            <tr><td>Dimensions</td><td>174mm x 7mm</td></tr>
+            <tr><td>Weight</td><td>12.5gm</td></tr>
+            <tr><td>Packing</td><td>100x6pcs, 600pcs/carton</td></tr>
+          </table>
+          <a href="https://wa.me/917990441625?text=Hi%2C%20I%27m%20interested%20in%20the%20750ml%20Round%20Bowl%20Lid%20%E2%80%94%20could%20you%20share%20pricing%20and%20MOQ%20details%3F" class="spec-inquire" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z" stroke="currentColor" stroke-width="1.4"/><path d="M8.5 9.7c0 3.2 2.6 5.8 5.8 5.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inquire Now</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ 1000ML ROUND BOWL PAIR (bonus row) ============ -->
+<section class="cat-section bg-tint" style="padding-top:0;">
+  <div class="wrap">
+    <div class="spec-grid stagger" style="grid-template-columns:repeat(3,1fr);">
+      <div class="spec-card reveal">
+        <div class="spec-thumb">
+          <svg viewBox="0 0 100 100"><path d="M16 36 Q16 82 50 82 Q84 82 84 36" fill="none" stroke="#00707D" stroke-width="3"/><ellipse cx="50" cy="36" rx="34" ry="8" fill="none" stroke="#00A2B1" stroke-width="2"/></svg>
+        </div>
+        <div class="spec-body">
+          <h3>1000ml Round Bowl</h3>
+          <table class="spec-table">
+            <tr><td>Dimensions</td><td>197mm x 65mm</td></tr>
+            <tr><td>Weight</td><td>22gm</td></tr>
+            <tr><td>Packing</td><td>100x6pcs, 600pcs/carton</td></tr>
+          </table>
+          <a href="https://wa.me/917990441625?text=Hi%2C%20I%27m%20interested%20in%20the%201000ml%20Round%20Bowl%20%E2%80%94%20could%20you%20share%20pricing%20and%20MOQ%20details%3F" class="spec-inquire" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z" stroke="currentColor" stroke-width="1.4"/><path d="M8.5 9.7c0 3.2 2.6 5.8 5.8 5.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inquire Now</a>
+        </div>
+      </div>
+      <div class="spec-card reveal">
+        <div class="spec-thumb">
+          <svg viewBox="0 0 100 100"><ellipse cx="50" cy="50" rx="36" ry="15" fill="none" stroke="#00A2B1" stroke-width="3"/></svg>
+        </div>
+        <div class="spec-body">
+          <h3>1000ml Round Bowl Lid</h3>
+          <table class="spec-table">
+            <tr><td>Dimensions</td><td>196mm x 7mm</td></tr>
+            <tr><td>Weight</td><td>15gm</td></tr>
+            <tr><td>Packing</td><td>100x6pcs, 600pcs/carton</td></tr>
+          </table>
+          <a href="https://wa.me/917990441625?text=Hi%2C%20I%27m%20interested%20in%20the%201000ml%20Round%20Bowl%20Lid%20%E2%80%94%20could%20you%20share%20pricing%20and%20MOQ%20details%3F" class="spec-inquire" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z" stroke="currentColor" stroke-width="1.4"/><path d="M8.5 9.7c0 3.2 2.6 5.8 5.8 5.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inquire Now</a>
+        </div>
+      </div>
+      <div class="spec-card custom-card reveal" style="display:flex; align-items:center; justify-content:center; padding:30px; text-align:center;">
+        <div style="width:100%;">
+          <p class="eyebrow" style="justify-content:center;">Custom Sizing</p>
+          <h3 style="font-size:16px; margin-bottom:8px;">Don't see your size?</h3>
+          <p style="font-size:13px; color:var(--graphite); line-height:1.6;">We offer custom product development for private-label and bulk orders — tell us your specification and our team will get back with a tailored quote.</p>
+          <a href="https://wa.me/917990441625?text=Hi%2C%20I%20have%20a%20custom%20sizing%20requirement%20I%27d%20like%20to%20discuss." class="spec-inquire" target="_blank" rel="noopener">Request Custom Quote</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ALL PRODUCTS ARE ============ -->
+<section class="section-pad">
+  <div class="wrap">
+    <div class="section-head reveal" style="text-align:center; margin-left:auto; margin-right:auto;">
+      <h2 class="section-title">All products are</h2>
+    </div>
+    <div class="badge-row stagger">
+      <div class="badge-card reveal"><!--<div class="icon">🌿</div>--><h4>Food-Grade &amp; Toxin-Free</h4><p>Safe for direct food contact, hot or cold.</p></div>
+      <div class="badge-card reveal"><!--<div class="icon">🔥</div>--><h4>Microwave-Safe</h4><p>Reheat straight in the container.</p></div>
+      <div class="badge-card reveal"><!--<div class="icon">❄️</div>--><h4>Freezer-Safe</h4><p>Goes from freezer to microwave with ease.</p></div>
+      <div class="badge-card reveal"><!--<div class="icon">💧</div>--><h4>Sturdy &amp; Leak-Resistant</h4><p>Holds up to oils, gravies and hot liquids.</p></div>
+      <div class="badge-card reveal"><!--<div class="icon">🌍</div>--><h4>Fully Compostable</h4><p>Breaks down naturally within months.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DOWNLOAD BROCHURE / CTA ============ -->
+<section id="catalogue">
+  <div class="brochure-banner">
+    <h2>Take the collection <em>with you</em></h2>
+    <p>Every size, weight and packing detail across all seven categories — in one downloadable catalogue.</p>
+    <div class="cta-actions">
+      <a href="#" class="btn btn-light" download>Download Catalogue</a>
+      <a href="index.html#export" class="btn btn-outline" style="color:#fff; border-color:rgba(251,247,238,0.4);">Get a Quote</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer id="contact">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">green<span class="dot">•</span><em>gold</em></div>
+        <p class="footer-tagline">"Go Green, Go Bold with GreenGold" — premium sugarcane bagasse tableware, manufactured by SNG Eco India Pvt Ltd.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="index.html#about">About</a></li>
+          <li><a href="index.html#manufacturing">Manufacturing</a></li>
+          <li><a href="index.html#export">Export</a></li>
+          <li><a href="index.html#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Products</h4>
+        <ul>
+          <li><a href="#round-plates">Round Plates</a></li>
+          <li><a href="#compartment-plates">Compartment Plates</a></li>
+          <li><a href="#bowls">Bowls</a></li>
+          <li><a href="#clamshell">Clamshell</a></li>
+          <li><a href="#lids-glass">Lids &amp; Cups</a></li>
+          <li><a href="#takeout">Takeout Containers</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Corporate Office</h4>
+        <address>
+          1313–1314, 13th Floor, Fortune Business Hub,<br>
+          Nr. Shell Petrol Pump, Science City Road,<br>
+          Sola, Ahmedabad – 380060, Gujarat, India
+        </address>
+        <ul style="margin-top:16px;">
+          <li><a href="tel:+917990441625">+91 7990441625</a></li>
+          <li><a href="mailto:sales@sngecoindia.com">sales@sngecoindia.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 SNG Eco India Pvt Ltd. All rights reserved.</span>
+      <div class="footer-marks">
+        <span>100% Compostable</span><span>Food-Grade</span><span>Plastic-Free</span><span>Export Ready</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ FLOATING WHATSAPP ============ -->
+<a href="https://wa.me/917990441625?text=Hi%2C%20I%27m%20interested%20in%20GreenGold%20bagasse%20tableware" class="whatsapp-float" target="_blank" rel="noopener">
+  <svg viewBox="0 0 24 24" fill="none">
+    <circle cx="12" cy="12" r="11" fill="#ffffff" opacity="0.15"/>
+    <path d="M7 17l0.9-3.2A6 6 0 1 1 10.8 17L7 17z" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"/>
+    <path d="M9.3 10.6c0 2.3 2 4.2 4.3 4.2" stroke="#fff" stroke-width="1.4" stroke-linecap="round"/>
+  </svg>
+  <span>Chat with us</span>
+</a>
+
+<script>
+  // Nav shrink on scroll
+  const nav = document.getElementById('siteNav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 40) nav.classList.add('is-scrolled');
+    else nav.classList.remove('is-scrolled');
+  }, { passive:true });
+
+  // Reveal-on-scroll
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting){
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+  revealEls.forEach((el) => io.observe(el));
+
+  // Highlight active category in jump nav on scroll
+  const catLinks = document.querySelectorAll('#catNav a');
+  const catSections = Array.from(catLinks).map(a => document.querySelector(a.getAttribute('href')));
+  const catIO = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      const idx = catSections.indexOf(entry.target);
+      if (entry.isIntersecting && idx > -1){
+        catLinks.forEach(l => l.classList.remove('active'));
+        catLinks[idx].classList.add('active');
+      }
+    });
+  }, { threshold: 0.3, rootMargin: '-120px 0px -50% 0px' });
+  catSections.forEach(s => { if (s) catIO.observe(s); });
+</script>
+
+</body>
+</html>
